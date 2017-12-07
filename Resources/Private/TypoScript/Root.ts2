@@ -1,0 +1,50 @@
+prototype(Jonnitto.Issuu:Issuu) < prototype(TYPO3.TypoScript:Tag) {
+    id = ${q(node).property('id')}
+    id.@process.removeLink = ${String.pregReplace(value, '/(?>[\S]*?#)(\S*)/', '$1')}
+
+    @if.render = ${this.id || node.context.inBackend}
+
+    ratioFromSettings = ${Configuration.setting('Jonnitto.Issuu.defaultRatio')}
+    ratioFromNode = ${q(node).property('ratio')}
+    ratioSplit = ${String.split(this.ratioFromNode || this.ratioFromSettings, ':')}
+    ratio = ${this.ratioSplit[0] / this.ratioSplit[1]}
+
+    @context {
+        ratio = ${this.ratio}
+        id = ${this.id}
+    }
+
+    attributes {
+        class = 'jonnitto-issuu'
+        style = ${id ? String.replace(Configuration.setting('Jonnitto.Issuu.style.container'), '%ratio%', (100 / ratio) + '%') : null}
+    }
+
+    content = TYPO3.TypoScript:Case {
+        hasID {
+            condition = ${id ? true : false}
+            renderer = TYPO3.TypoScript:Tag {
+                tagName = 'iframe'
+                attributes {
+                    src = ${'//e.issuu.com/embed.html#' + id}
+                    style = ${Configuration.setting('Jonnitto.Issuu.style.iframe')}
+                    allowfullscreen = true
+                    frameborder = '0'
+                }
+            }
+        }
+        noID {
+            condition = ${id ? false : true}
+            renderer = Carbon.Notification:Backend {
+                content = ${Translation.translate('pleaseAdID', null, [], 'NodeTypes/Issuu', 'Jonnitto.Issuu')}
+            }
+        }
+    }
+
+
+    @process.contentElementWrapping {
+      expression = TYPO3.Neos:ContentElementWrapping
+      @position = 'end 999999999'
+    }
+
+    @exceptionHandler = 'TYPO3\\Neos\\TypoScript\\ExceptionHandlers\\NodeWrappingHandler'
+}

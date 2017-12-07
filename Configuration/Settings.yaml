@@ -1,0 +1,17 @@
+Jonnitto:
+  Issuu:
+    defaultRatio: '16:9'
+    style:
+      container: 'position:relative;width: 100%;padding-top:%ratio%;height:0;overflow:hidden;max-width:100%;'
+      iframe: 'position:absolute;top:0;left:0;width:100%;height:100%;'
+
+TYPO3:
+  Neos:
+    typoScript:
+      autoInclude:
+        Jonnitto.Issuu: true
+    userInterface:
+      translation:
+        autoInclude:
+          Jonnitto.Issuu:
+            - 'NodeTypes/*'

@@ -1,0 +1,32 @@
+{
+    "name": "jonnitto/issuu",
+    "description": "Embed Issuu into Neos",
+    "type": "typo3-flow-plugin",
+    "license": "MIT",
+    "require": {
+        "neos/neos": "^2.0",
+        "carbon/notification": "^0.1"
+    },
+    "authors": [
+        {
+            "name": "Jon Uhlmann",
+            "email": "me@jonnitto.ch",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "Jonnitto\\Issuu": "Classes"
+        }
+    },
+    "archive": {
+        "exclude": [".editorconfig", ".gitignore", ".github", ".gitattributes", "CODE_OF_CONDUCT.md"]
+    },
+    "extra": {
+        "marketplace-account": "me@jonnitto.ch",
+        "installer-name": "Jonnitto.Issuu",
+        "neos": {
+            "package-key": "Jonnitto.Issuu"
+        }
+    }
+}
