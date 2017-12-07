@@ -1,0 +1,40 @@
+'Jonnitto.Issuu:Issuu':
+  superTypes:
+    'Neos.Neos:Content': true
+  ui:
+    label: i18n
+    icon: icon-file-pdf-o
+    inspector:
+      groups:
+        settings:
+          label: i18n
+          icon: icon-file-pdf-o
+  properties:
+    id:
+      type: string
+      ui:
+        label: i18n
+        reloadIfChanged: true
+        inspector:
+          group: settings
+          position: 10
+      validation:
+        'Neos.Neos/Validation/NumberValidator': []
+        'Neos.Neos/Validation/NotEmptyValidator': []
+    ratio:
+      type: string
+      ui:
+        label: i18n
+        reloadIfChanged: true
+        inspector:
+          group: settings
+          editor: Neos.Neos/Inspector/Editors/SelectBoxEditor
+          position: 20
+          editorOptions:
+            allowEmpty: true
+            placeholder: i18n
+            values:
+              '16:9':
+                label: '16:9'
+              '4:3':
+                label: '4:3'

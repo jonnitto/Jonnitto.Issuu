@@ -1,0 +1,30 @@
+{
+    "name": "jonnitto/issuu",
+    "description": "Embed Issuu into Neos",
+    "type": "neos-plugin",
+    "license": "MIT",
+    "require": {
+        "neos/neos": "^3.0",
+        "carbon/notification": "^1.0"
+    },
+    "authors": [
+        {
+            "name": "Jon Uhlmann",
+            "email": "me@jonnitto.ch",
+            "homepage": "https://www.jonnitto.ch",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Jonnitto\\Issuu\\": "Classes/"
+        }
+    },
+    "extra": {
+        "marketplace-account": "me@jonnitto.ch",
+        "installer-name": "Jonnitto.Issuu",
+        "neos": {
+            "package-key": "Jonnitto.Issuu"
+        }
+    }
+}

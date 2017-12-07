@@ -1,0 +1,50 @@
+prototype(Jonnitto.Issuu:Issuu) < prototype(Neos.Fusion:Tag) {
+    id = ${q(node).property('id')}
+    id.@process.removeLink = ${String.pregReplace(value, '/(?>[\S]*?#)(\S*)/', '$1')}
+
+    @if.render = ${this.id || node.context.inBackend}
+
+    ratioFromSettings = ${Configuration.setting('Jonnitto.Issuu.defaultRatio')}
+    ratioFromNode = ${q(node).property('ratio')}
+    ratioSplit = ${String.split(this.ratioFromNode || this.ratioFromSettings, ':')}
+    ratio = ${this.ratioSplit[0] / this.ratioSplit[1]}
+
+    @context {
+        ratio = ${this.ratio}
+        id = ${this.id}
+    }
+
+    attributes {
+        class = 'jonnitto-issuu'
+        style = ${id ? String.replace(Configuration.setting('Jonnitto.Issuu.style.container'), '%ratio%', (100 / ratio) + '%') : null}
+    }
+
+    content = Neos.Fusion:Case {
+        hasID {
+            condition = ${id ? true : false}
+            renderer = Neos.Fusion:Tag {
+                tagName = 'iframe'
+                attributes {
+                    src = ${'//e.issuu.com/embed.html#' + id}
+                    style = ${Configuration.setting('Jonnitto.Issuu.style.iframe')}
+                    allowfullscreen = true
+                    frameborder = '0'
+                }
+            }
+        }
+        noID {
+            condition = ${id ? false : true}
+            renderer = Carbon.Notification:Backend {
+                content = ${Translation.translate('pleaseAdID', null, [], 'NodeTypes/Issuu', 'Jonnitto.Issuu')}
+            }
+        }
+    }
+
+
+    @process.contentElementWrapping {
+      expression = Neos.Neos:ContentElementWrapping
+      @position = 'end 999999999'
+    }
+
+    @exceptionHandler = 'Neos\\Neos\\Fusion\\ExceptionHandlers\\NodeWrappingHandler'
+}
