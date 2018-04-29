@@ -11,10 +11,10 @@
 
 [Issuu](http://issuu.com/) for [Neos CMS](https://www.neos.io)
 
-| Version | Neos |
-| ------- | ---- |
-| 1.\*    | 2.\* |
-| 2.\*    | 3.\* |
+| Version | Neos        |
+| ------- | ----------- |
+| 1.\*    | 2.\*        |
+| > 2.1   | 3.\* + 4.\* |
 
 ## Installation
 

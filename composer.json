@@ -4,8 +4,8 @@
     "type": "neos-plugin",
     "license": "MIT",
     "require": {
-        "neos/neos": "^3.0",
-        "carbon/notification": "^1.0"
+        "neos/neos": "~3.0 || ~4.0",
+        "carbon/notification": "^1.2"
     },
     "authors": [
         {
