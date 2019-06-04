@@ -19,7 +19,6 @@
           group: settings
           position: 10
       validation:
-        'Neos.Neos/Validation/NumberValidator': []
         'Neos.Neos/Validation/NotEmptyValidator': []
     ratio:
       type: string
