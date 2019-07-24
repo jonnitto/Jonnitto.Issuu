@@ -1,0 +1,31 @@
+prototype(Jonnitto.Issuu:Issuu) < prototype(Neos.Neos:ContentComponent) {
+    id = ${q(node).property('id')}
+    ratio = ${q(node).property('ratio')}
+    class = 'jonnitto-issuu'
+    wrapper = ${Configuration.setting('Jonnitto.Issuu.wrapper')}
+    allowfullscreen = ${Configuration.setting('Jonnitto.Issuu.allowfullscreen')}
+
+    @if.hasID = ${this.id || node.context.inBackend}
+
+    renderer = Neos.Fusion:Component {
+        issuu = Jonnitto.Issuu:Component.Issuu {
+            id = ${props.id}
+            ratio = ${props.ratio}
+            class = ${props.class}
+            allowfullscreen = ${props.allowfullscreen}
+            clickable = ${node.context.live}
+        }
+        wrapper = ${props.wrapper}
+
+        @if.hasIssuu = ${this.issuu || node.context.inBackend}
+
+        renderer = afx`
+            {props.issuu}
+            <Jonnitto.Issuu:Component.Tag class={props.class} @if.set={!props.issuu}>
+                <Carbon.Notification:Backend
+                    content={Translation.translate('pleaseAdID', null, [], 'NodeTypes/Issuu', 'Jonnitto.Issuu')}
+                />
+            </Jonnitto.Issuu:Component.Tag>
+        `
+    }
+}

@@ -1,0 +1,34 @@
+prototype(Jonnitto.Issuu:Component.Issuu) < prototype(Neos.Fusion:Component) {
+    id = null
+    ratio = null
+    class = 'jonnitto-issuu'
+    allowfullscreen = ${Configuration.setting('Jonnitto.Issuu.allowfullscreen')}
+    clickable = true
+
+    @if.hasID = ${Type.isString(this.id) ? String.trim(this.id) : false}
+
+    renderer = Neos.Fusion:Component {
+        id = ${String.pregReplace(String.trim(props.id), '/(?>[\S]*?#)(\S*)/', '$1')}
+        containerStyle = ${Configuration.setting('Jonnitto.Issuu.style.container')}
+        iframeStyle = ${Configuration.setting('Jonnitto.Issuu.style.iframe')}
+        allowfullscreen = ${props.allowfullscreen}
+        ratioFromSettings = ${Configuration.setting('Jonnitto.Issuu.defaultRatio')}
+        ratioSplit = ${String.split(props.ratio || this.ratioFromSettings, ':')}
+        ratio = ${this.ratioSplit[0] / this.ratioSplit[1]}
+        style = ${String.replace(this.containerStyle, '%ratio%', (100 / this.ratio) + '%')}
+        pointerEvents = ${props.clickable ? '' : 'pointer-events:none;'}
+
+        @if.hasID = ${this.id}
+
+        renderer = afx`
+            <Jonnitto.Issuu:Component.Tag class={props.class} style={props.style}>
+                <iframe
+                    src={'//e.issuu.com/embed.html#' + props.id}
+                    style={props.pointerEvents + props.iframeStyle}
+                    allowfullscreen={props.allowfullscreen}
+                    frameborder='0'
+                ></iframe>
+            </Jonnitto.Issuu:Component.Tag>
+        `
+    }
+}

@@ -1,0 +1,18 @@
+prototype(Jonnitto.Issuu:Component.Tag) < prototype(Neos.Fusion:Component) {
+    class = 'jonnitto-issuu'
+    style = null
+    wrapper = ${Configuration.setting('Jonnitto.Issuu.wrapper')}
+    content = null
+
+    @if.hasContent = ${this.content}
+
+    renderer = Carbon.Eel:Tag {
+        tagName = ${props.wrapper ? 'div' : null}
+        attributes.class = ${Type.isString(props.wrapper) ? props.wrapper : null}
+        content = afx`
+             <div class={props.class} style={props.style}>
+                {props.content}
+            </div>
+        `
+    }
+}
