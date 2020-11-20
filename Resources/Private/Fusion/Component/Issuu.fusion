@@ -5,10 +5,34 @@ prototype(Jonnitto.Issuu:Component.Issuu) < prototype(Neos.Fusion:Component) {
     allowfullscreen = ${Configuration.setting('Jonnitto.Issuu.allowfullscreen')}
     clickable = true
 
-    @if.hasID = ${Type.isString(this.id) ? String.trim(this.id) : false}
+    id.@process.trim = ${value ? String.trim(value) : null}
+    embedUrl = 'e.issuu.com/embed.html'
+    oldEmbedCode = ${this.embedUrl + '#'}
+    newEmbedCode = ${this.embedUrl + '?'}
+    @if.hasID = ${this.id}
 
     renderer = Neos.Fusion:Component {
-        id = ${String.pregReplace(String.trim(props.id), '/(?>[\S]*?#)(\S*)/', '$1')}
+        idHasDomain = ${String.indexOf(props.id, props.embedUrl) != -1}
+        url = Neos.Fusion:Case {
+            hasEmbedUrl {
+                condition = ${String.indexOf(props.id, props.embedUrl) != -1}
+                renderer = Neos.Fusion:Value {
+                    @if.set = ${this.link}
+                    embedCode = ${String.indexOf(props.id, props.oldEmbedCode) != -1 ? props.oldEmbedCode : props.newEmbedCode}
+                    link = ${String.split(String.split(props.id, this.embedCode)[1], '"')[0]}
+                    value = ${this.embedCode + this.link}
+                }
+            }
+            plainCodeOld {
+                condition = ${String.toString(String.toInteger(props.id)) == props.id}
+                renderer = ${props.oldEmbedCode + props.id}
+            }
+            plainCodeNew {
+                condition = true
+                renderer = ${props.newEmbedCode + props.id}
+            }
+            @process.prepend = ${value ? '//' + value : null}
+        }
         containerStyle = ${Configuration.setting('Jonnitto.Issuu.style.container')}
         iframeStyle = ${Configuration.setting('Jonnitto.Issuu.style.iframe')}
         allowfullscreen = ${props.allowfullscreen}
@@ -18,12 +42,12 @@ prototype(Jonnitto.Issuu:Component.Issuu) < prototype(Neos.Fusion:Component) {
         style = ${String.replace(this.containerStyle, '%ratio%', (100 / this.ratio) + '%')}
         pointerEvents = ${props.clickable ? '' : 'pointer-events:none;'}
 
-        @if.hasID = ${this.id}
+        @if.set = ${this.url}
 
         renderer = afx`
             <Jonnitto.Issuu:Component.Tag class={props.class} style={props.style}>
                 <iframe
-                    src={'//e.issuu.com/embed.html#' + props.id}
+                    src={props.url}
                     style={props.pointerEvents + props.iframeStyle}
                     allowfullscreen={props.allowfullscreen}
                     frameborder='0'

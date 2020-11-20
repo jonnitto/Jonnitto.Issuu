@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+<xliff version="1.2"
+    xmlns="urn:oasis:names:tc:xliff:document:1.2">
     <file original="" product-name="Jonnitto.Issuu" source-language="en" datatype="plaintext">
         <body>
             <trans-unit id="ui.label" xml:space="preserve">
@@ -9,7 +10,7 @@
                 <source>Issuu</source>
             </trans-unit>
             <trans-unit id="properties.id" xml:space="preserve">
-                <source>ID</source>
+                <source>Embeded Code / ID</source>
             </trans-unit>
             <trans-unit id="properties.ratio" xml:space="preserve">
                 <source>Ratio</source>
@@ -18,7 +19,7 @@
                 <source>Default</source>
             </trans-unit>
             <trans-unit id="pleaseAdID" xml:space="preserve">
-                <source>Please add a Issuu ID in the insepector</source>
+                <source>Please add a Issuu Code / ID in the insepector</source>
             </trans-unit>
         </body>
     </file>
