@@ -24,7 +24,8 @@ prototype(Jonnitto.Issuu:Component.Issuu) < prototype(Neos.Fusion:Component) {
                 }
             }
             plainCodeOld {
-                condition = ${String.toString(String.toInteger(props.id)) == props.id}
+                string = ${String.replace(props.id, '/', '')}
+                condition = ${String.toString(String.toInteger(this.string)) == this.string}
                 renderer = ${props.oldEmbedCode + props.id}
             }
             plainCodeNew {
