@@ -6,14 +6,14 @@
     "require": {
         "neos/neos": "^3.3 || ^4.0 || ^5.0 || ^7.0",
         "neos/fusion-afx": "^1.0 || ^7.0",
-        "carbon/eel": "^1.5",
+        "carbon/eel": "^1.5 || ^2.0",
         "carbon/notification": "^1.2 || ^2.0"
     },
     "authors": [
         {
             "name": "Jon Uhlmann",
-            "email": "me@jonnitto.ch",
-            "homepage": "https://www.jonnitto.ch",
+            "email": "hello@uhlmann.pro",
+            "homepage": "https://www.uhlmann.pro",
             "role": "Developer"
         }
     ],
@@ -23,7 +23,6 @@
         }
     },
     "extra": {
-        "marketplace-account": "me@jonnitto.ch",
         "installer-name": "Jonnitto.Issuu",
         "neos": {
             "package-key": "Jonnitto.Issuu"
