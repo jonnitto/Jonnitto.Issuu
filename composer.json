@@ -2,7 +2,7 @@
     "name": "jonnitto/issuu",
     "description": "Embed Issuu into Neos",
     "type": "neos-plugin",
-    "license": "MIT",
+    "license": "GPL-3.0",
     "require": {
         "neos/neos": "^5.3 || ^7.0 || ^8.0",
         "neos/fusion-afx": "^1.0 || ^7.0",
