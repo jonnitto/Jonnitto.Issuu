@@ -1,8 +1,8 @@
 prototype(Jonnitto.Issuu:Component.Tag) < prototype(Neos.Fusion:Component) {
     class = 'jonnitto-issuu'
-    style = null
+    style = ${null}
     wrapper = ${Configuration.setting('Jonnitto.Issuu.wrapper')}
-    content = null
+    content = ${null}
 
     @if.hasContent = ${this.content}
 

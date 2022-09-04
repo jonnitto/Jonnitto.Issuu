@@ -1,6 +1,6 @@
 prototype(Jonnitto.Issuu:Component.Issuu) < prototype(Neos.Fusion:Component) {
-    id = null
-    ratio = null
+    id = ${null}
+    ratio = ${null}
     class = 'jonnitto-issuu'
     allowfullscreen = ${Configuration.setting('Jonnitto.Issuu.allowfullscreen')}
     clickable = true
